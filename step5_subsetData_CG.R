@@ -12,6 +12,17 @@ setwd("C:/Users/cgriger/Dropbox/Academia/IOWA/NASP/Replicability and Tutorial of
 load(file = "../../main data/mainData.RData")
 
 ################################################################################
+# quick descriptives  of mainData for number in levels of schools and students
+
+# finding unique counts of students and schools per group of 'closed'
+num_closed = aggregate(cbind(stateID, b8000bc) ~ closed, data = mainData, function(x) length(unique(x)))
+names(num_closed)[2:3] <- c("UniqueStudents", "UniqueSchools")
+
+# finding unique counts of students and schools per group of 'dupes'
+num_dupes = aggregate(stateID ~ dupes, data = mainData, function(x) length(unique(x)))
+names(num_dupes)[2] <- "UniqueStudents"
+
+########################################################################################################################################################
 # checking assessments
 
 # checking students who have NAs for KAP
